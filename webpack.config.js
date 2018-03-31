@@ -10,7 +10,7 @@ const STATIC_DIR = path.join(SRC_DIR, "static");
 
 const config = {
   entry: {
-    Backtracker: "./src/js/index.jsx"
+    BackTracker: "./src/js/index.jsx"
   },
   output: {
     path: DST_DIR,
