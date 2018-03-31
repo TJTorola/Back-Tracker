@@ -1,8 +1,7 @@
 import "babel-polyfill";
 
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
+import { render, h } from "preact";
+import { Provider } from "preact-redux";
 
 import Bart from "~/api/bart";
 import App from "~/app";
@@ -18,7 +17,7 @@ export const main = () => {
   window.store = createStore();
 
   // Mount the application into #app
-  ReactDOM.render(
+  render(
     <Provider store={store}>
       <App />
     </Provider>,
