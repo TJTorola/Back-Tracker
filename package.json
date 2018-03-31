@@ -30,7 +30,7 @@
     "pretty-quick": "^1.4.1",
     "ramda": "^0.25.0",
     "redux": "^3.7.2",
-    "redux-logger": "^3.0.6",
+    "redux-logger": "1.0.9",
     "redux-thunk": "^2.2.0",
     "regenerator-runtime": "^0.11.1",
     "reselect": "^3.0.1",
