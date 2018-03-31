@@ -7,9 +7,11 @@ import { Provider } from "react-redux";
 import Bart from "~/api/bart";
 import App from "~/app";
 import createStore from "~/store";
+import { initialize } from "~/store/actions";
 
 export const main = () => {
   const store = createStore();
+  store.dispatch(initialize());
 
   // Dev helpers
   window.Bart = Bart;
