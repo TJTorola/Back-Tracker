@@ -7,17 +7,29 @@ const UNIVERSAL_PARAMS = {
   json: "y"
 };
 
-const generateUrl = (base, command, addedParams = {}) => {
+const generateUrl = (root, command, addedParams = {}) => {
   const params = Object.assign({}, UNIVERSAL_PARAMS, addedParams);
   const paramString = Object.keys(params)
     .map(p => `${p}=${params[p]}`)
     .join("&");
 
-  return `http://api.bart.gov/api/${base}.aspx?cmd=${command}&${paramString}`;
+  return `http://api.bart.gov/api/${root}.aspx?cmd=${command}&${paramString}`;
 };
 
-const Bart = {
-  trainCount: () => fetch(generateUrl("bsa", "count"))
-};
+const API = [
+  {
+    name: "trainCount",
+    root: "bsa",
+    command: "count"
+  }
+];
+
+const Bart = API.reduce(
+  (acc, { name, root, command }) =>
+    Object.assign({}, acc, {
+      [name]: params => fetch(generateUrl(root, command, params))
+    }),
+  {}
+);
 
 export default Bart;
