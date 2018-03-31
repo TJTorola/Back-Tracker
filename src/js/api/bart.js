@@ -1,6 +1,5 @@
 // DOCS: http://api.bart.gov/docs/overview/index.aspx
 
-// This is the public token
 const BASE_URL = `http://api.bart.gov/api/`;
 const UNIVERSAL_PARAMS = {
   key: "MW9S-E7SL-26DU-VV8V",
