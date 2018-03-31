@@ -58,15 +58,14 @@ const API = [
   }
 ];
 
-const Bart = API.reduce(
-  (acc, { name, root, command, mapResponse }) =>
-    Object.assign({}, acc, {
-      [name]: params =>
-        fetch(generateUrl(root, command, params))
-          .then(response => response.json())
-          .then(parsedResponse => mapResponse(parsedResponse))
-    }),
-  {}
-);
+const Bart = API.reduce((acc, { name, root, command, mapResponse }) => {
+  const apiMethod = async params => {
+    const response = await fetch(generateUrl(root, command, params));
+    const parsedResponse = await response.json();
+    return mapResponse(parsedResponse);
+  };
+
+  return Object.assign({}, acc, { [name]: apiMethod });
+}, {});
 
 export default Bart;
