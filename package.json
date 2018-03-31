@@ -1,0 +1,42 @@
+{
+  "name": "backtracker",
+  "version": "1.0.0",
+  "description": "A simple webapp for skipping lines on Bart",
+  "main": "index.js",
+  "author": "Tyler Torola <tyler@tjt.codes>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production",
+    "deploy": "node ./bin/deploy.js",
+    "test": "jest",
+    "precommit": "pretty-quick --staged",
+    "postversion": "yarn run build && yarn run deploy"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "copy-webpack-plugin": "^4.5.1",
+    "gh-pages": "^1.1.0",
+    "husky": "^0.14.3",
+    "jest": "^22.4.3",
+    "prettier": "^1.11.1",
+    "pretty-quick": "^1.4.1",
+    "ramda": "^0.25.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.2.0",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
+    "webpack": "^4.3.0",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^3.1.1"
+  }
+}
