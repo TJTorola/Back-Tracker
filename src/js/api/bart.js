@@ -100,8 +100,7 @@ const API = [
           latitude: s.gtfs_latitude,
           longitude: s.gtfs_longitude
         }
-      })),
-      scheduleNumber: root.sched_num
+      }))
     })
   }
 ];
