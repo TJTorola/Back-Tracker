@@ -4,7 +4,7 @@ console.log("Deploying to Github pages!");
 ghPages.publish(
   "dst",
   {
-    remote: "tjtorola"
+    remote: "origin"
   },
   err => {
     if (err) {
