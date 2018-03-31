@@ -1,10 +1,18 @@
+import { lensProp, set } from "ramda";
+
 import { createReducer } from "~/util";
 
-const INIT_STATE = {};
+const INIT_STATE = {
+  status: "UNLOADED",
+  routes: []
+};
+const LOADING_STATE = set(lensProp("status"), "LOADING", INIT_STATE);
 
 export default createReducer(
   {
-    RECEIVE_ROUTES: ({ action }) => action.data.routes
+    INITIALIZE_BACK_TRACKER: () => LOADING_STATE,
+    RECEIVE_ROUTES: set(lensProp("routes")),
+    SET_STATUS: set(lensProp("status"))
   },
   INIT_STATE
 );
