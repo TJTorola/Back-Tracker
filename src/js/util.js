@@ -9,4 +9,4 @@ export const createReducer = (actionMap, initialState) => (
   state = initialState,
   action
 ) =>
-  actionMap[action.type] ? actionMap[action.type]({ state, action }) : state;
+  actionMap[action.type] ? actionMap[action.type](action.data, state) : state;
