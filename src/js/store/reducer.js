@@ -1,4 +1,5 @@
-import { lensProp, set } from "ramda";
+import lensProp from "ramda/src/lensProp";
+import set from "ramda/src/set";
 
 import { createReducer } from "~/util";
 
