@@ -1,4 +1,5 @@
-import "babel-polyfill";
+// POLYFILLS
+import "regenerator-runtime/runtime";
 
 import { render, h } from "preact";
 import { Provider } from "preact-redux";
