@@ -20,39 +20,51 @@ const API = [
   {
     name: "trainCount",
     root: "bsa",
-    command: "count"
+    command: "count",
+    mapResponse: console.log
   },
   {
     name: "serviceAdvisory",
     root: "bsa",
-    command: "bsa"
+    command: "bsa",
+    mapResponse: console.log
   },
   {
     name: "elevatorInformation",
     root: "bsa",
-    command: "elev"
+    command: "elev",
+    mapResponse: console.log
   },
   {
     name: "departureEstimate",
     root: "etd",
-    command: "etd"
+    command: "etd",
+    mapResponse: console.log
   },
   {
     name: "route",
     root: "route",
-    command: "routeInfo"
+    command: "routeInfo",
+    mapResponse: console.log
   },
   {
     name: "routes",
     root: "route",
-    command: "routes"
+    command: "routes",
+    mapResponse: ({ root }) => ({
+      routes: root.routes.route,
+      scheduleNumber: root.sched_num
+    })
   }
 ];
 
 const Bart = API.reduce(
-  (acc, { name, root, command }) =>
+  (acc, { name, root, command, mapResponse }) =>
     Object.assign({}, acc, {
-      [name]: params => fetch(generateUrl(root, command, params))
+      [name]: params =>
+        fetch(generateUrl(root, command, params))
+          .then(response => response.json())
+          .then(parsedResponse => mapResponse(parsedResponse))
     }),
   {}
 );
