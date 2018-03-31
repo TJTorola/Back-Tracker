@@ -60,7 +60,9 @@ const API = [
     name: "route",
     root: "route",
     command: "routeInfo",
-    mapResponse: console.log
+    mapResponse: ({ root }) => ({
+      route: root.routes.route
+    })
   },
   {
     name: "routes",
