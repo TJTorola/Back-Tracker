@@ -34,13 +34,19 @@ const API = [
     name: "trainCount",
     root: "bsa",
     command: "count",
-    mapResponse: console.log
+    mapResponse: ({ root }) => ({
+      trainCount: parseInt(root.traincount)
+    })
   },
   {
     name: "serviceAdvisory",
     root: "bsa",
     command: "bsa",
-    mapResponse: console.log
+    mapResponse: ({ root }) => ({
+      advisories: root.bsa.map(
+        ({ description }) => description["#cdata-section"]
+      )
+    })
   },
   {
     name: "elevatorInformation",
@@ -67,7 +73,13 @@ const API = [
     root: "route",
     command: "routes",
     mapResponse: ({ root }) => ({
-      routes: root.routes.route,
+      routes: root.routes.route.map(r => ({
+        name: r.name,
+        routeId: r.routeID,
+        abbreviation: r.abbr,
+        hexColor: r.hexcolor,
+        routeNumber: r.number
+      })),
       scheduleNumber: root.sched_num
     })
   }
