@@ -7,13 +7,28 @@ const UNIVERSAL_PARAMS = {
   json: "y"
 };
 
+const PARAM_MAP = {
+  routeNumber: "route",
+  scheduleNumber: "sched"
+};
+
 const generateUrl = (root, command, addedParams = {}) => {
-  const params = Object.assign({}, UNIVERSAL_PARAMS, addedParams);
+  const mappedParams = Object.keys(addedParams).reduce(
+    (acc, p) => Object.assign({}, acc, { [PARAM_MAP[p] || p]: addedParams[p] }),
+    {}
+  );
+
+  const params = Object.assign(
+    { cmd: command },
+    UNIVERSAL_PARAMS,
+    mappedParams
+  );
+
   const paramString = Object.keys(params)
     .map(p => `${p}=${params[p]}`)
     .join("&");
 
-  return `http://api.bart.gov/api/${root}.aspx?cmd=${command}&${paramString}`;
+  return `http://api.bart.gov/api/${root}.aspx?${paramString}`;
 };
 
 const API = [
@@ -58,14 +73,17 @@ const API = [
   }
 ];
 
-const Bart = API.reduce((acc, { name, root, command, mapResponse }) => {
-  const apiMethod = async params => {
-    const response = await fetch(generateUrl(root, command, params));
-    const parsedResponse = await response.json();
-    return mapResponse(parsedResponse);
-  };
+const Bart = API.reduce(
+  (acc, { name, root, command, mapResponse, requiredParams }) => {
+    const apiMethod = async params => {
+      const response = await fetch(generateUrl(root, command, params));
+      const parsedResponse = await response.json();
+      return mapResponse(parsedResponse);
+    };
 
-  return Object.assign({}, acc, { [name]: apiMethod });
-}, {});
+    return Object.assign({}, acc, { [name]: apiMethod });
+  },
+  {}
+);
 
 export default Bart;
