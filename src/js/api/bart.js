@@ -21,6 +21,31 @@ const API = [
     name: "trainCount",
     root: "bsa",
     command: "count"
+  },
+  {
+    name: "serviceAdvisory",
+    root: "bsa",
+    command: "bsa"
+  },
+  {
+    name: "elevatorInformation",
+    root: "bsa",
+    command: "elev"
+  },
+  {
+    name: "departureEstimate",
+    root: "etd",
+    command: "etd"
+  },
+  {
+    name: "route",
+    root: "route",
+    command: "routeInfo"
+  },
+  {
+    name: "routes",
+    root: "route",
+    command: "routes"
   }
 ];
 
