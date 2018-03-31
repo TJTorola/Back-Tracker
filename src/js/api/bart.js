@@ -82,6 +82,27 @@ const API = [
       })),
       scheduleNumber: root.sched_num
     })
+  },
+  {
+    name: "stations",
+    root: "stn",
+    command: "stns",
+    mapResponse: ({ root }) => ({
+      stations: root.stations.station.map(s => ({
+        name: s.name,
+        abbreviation: s.abbr,
+        address: {
+          city: s.city,
+          street: s.address,
+          zipCode: s.zipcode,
+          state: s.state,
+          county: s.county,
+          latitude: s.gtfs_latitude,
+          longitude: s.gtfs_longitude
+        }
+      })),
+      scheduleNumber: root.sched_num
+    })
   }
 ];
 
