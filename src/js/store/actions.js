@@ -2,12 +2,14 @@ import Bart from "~/api/bart";
 import { createThunk, createAction } from "~/util";
 
 export const receiveRoutes = createAction("RECEIVE_ROUTES");
+export const receiveStations = createAction("RECEIVE_STATIONS");
 export const setStatus = createAction("SET_STATUS");
 
 export const initialize = createThunk(
   "INITIALIZE_BACK_TRACKER",
   () => async ({ getState, dispatch }) => {
-    await dispatch(requestRoutes());
+    await Promise.all([dispatch(requestRoutes()), dispatch(requestStations())]);
+
     dispatch(setStatus("LOADED"));
   }
 );
@@ -17,5 +19,13 @@ export const requestRoutes = createThunk(
   () => async ({ dispatch }) => {
     const { routes } = await Bart.routes();
     dispatch(receiveRoutes(routes));
+  }
+);
+
+export const requestStations = createThunk(
+  "REQUEST_STATIONS",
+  () => async ({ dispatch }) => {
+    const { stations } = await Bart.stations();
+    dispatch(receiveStations(stations));
   }
 );
