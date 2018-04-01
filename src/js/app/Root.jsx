@@ -10,7 +10,7 @@ const Root = ({
   stations,
   toStation
 }) => (
-  <div>
+  <nav>
     <label>From:</label>
     <select value={fromStation} onChange={setFromStation}>
       {stations.map(s => (
@@ -28,7 +28,7 @@ const Root = ({
         </option>
       ))}
     </select>
-  </div>
+  </nav>
 );
 
 const mapStateToProps = state => ({

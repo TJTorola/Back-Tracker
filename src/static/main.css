@@ -4,3 +4,22 @@ html {
   font-family: "Raleway";
   color: #fff;
 }
+
+nav {
+  margin: 0 auto;
+  align-self: center;
+  display: flex;
+  width: 320px;
+  height: 50px;
+  flex-wrap: wrap;
+}
+
+nav label {
+  text-align: right;
+  margin-right: 10px;
+  width: 60px;
+}
+
+nav select {
+  width: 250px;
+}
