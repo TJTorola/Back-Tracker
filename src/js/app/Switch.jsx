@@ -1,7 +1,8 @@
 import { h } from "preact";
 import { connect } from "preact-redux";
 
-import Loader from "./Loader";
+import Loader from "~/components/Loader";
+
 import Root from "./Root";
 
 const Switch = ({ status }) => {
