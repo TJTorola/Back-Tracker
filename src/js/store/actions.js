@@ -37,3 +37,12 @@ export const requestStations = createThunk(
     dispatch(receiveStations(stations));
   }
 );
+
+export const swapStations = createThunk(
+  "SWAP_STATIONS",
+  () => ({ dispatch, getState }) => {
+    const { toStation, fromStation } = getState();
+    dispatch(setToStation(fromStation));
+    dispatch(setFromStation(toStation));
+  }
+);
