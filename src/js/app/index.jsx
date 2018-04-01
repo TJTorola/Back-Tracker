@@ -3,11 +3,7 @@ import { connect } from "preact-redux";
 
 import Loader from "./Loader";
 
-const App = ({ status }) => (
-  <div>
-    <Loader />
-  </div>
-);
+const App = ({ status }) => <Loader size={80} />;
 
 const mapStateToProps = state => ({
   status: state.status

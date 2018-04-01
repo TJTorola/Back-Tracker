@@ -9,6 +9,7 @@ export default ({ size = 44, color = "#fff" }) => (
     viewBox="0 0 44 44"
     xmlns="http://www.w3.org/2000/svg"
     stroke={color}
+    className="loader"
   >
     <g fill="none" fill-rule="evenodd" stroke-width="2">
       <circle cx="22" cy="22" r="1">
