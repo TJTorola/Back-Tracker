@@ -1,3 +1,5 @@
+import lazyLoadCSS from "lazyload-css";
+
 import Bart from "~/api/bart";
 import { createThunk, createAction } from "~/util";
 
@@ -10,7 +12,11 @@ export const setToStation = createAction("SET_TO_STATION");
 export const initialize = createThunk(
   "INITIALIZE_BACK_TRACKER",
   () => async ({ getState, dispatch }) => {
-    await Promise.all([dispatch(requestRoutes()), dispatch(requestStations())]);
+    await Promise.all([
+      dispatch(requestRoutes()),
+      dispatch(requestStations()),
+      lazyLoadCSS("main.css", "main")
+    ]);
 
     dispatch(setStatus("LOADED"));
   }
