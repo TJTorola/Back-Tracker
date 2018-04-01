@@ -1,8 +1,8 @@
 // DOCS: http://api.bart.gov/docs/overview/index.aspx
 
 const UNIVERSAL_PARAMS = {
-  key: "MW9S-E7SL-26DU-VV8V",
-  json: "y"
+  json: "y",
+  key: "MW9S-E7SL-26DU-VV8V"
 };
 
 const PARAM_MAP = {
@@ -31,77 +31,77 @@ const generateUrl = (root, command, addedParams = {}) => {
 
 const API = [
   {
-    name: "trainCount",
-    root: "bsa",
     command: "count",
     mapResponse: ({ root }) => ({
       trainCount: parseInt(root.traincount)
-    })
+    }),
+    name: "trainCount",
+    root: "bsa"
   },
   {
-    name: "serviceAdvisory",
-    root: "bsa",
     command: "bsa",
     mapResponse: ({ root }) => ({
       advisories: root.bsa.map(
         ({ description }) => description["#cdata-section"]
       )
-    })
+    }),
+    name: "serviceAdvisory",
+    root: "bsa"
   },
   {
-    name: "elevatorInformation",
-    root: "bsa",
     command: "elev",
-    mapResponse: console.log
+    mapResponse: console.log,
+    name: "elevatorInformation",
+    root: "bsa"
   },
   {
-    name: "departureEstimate",
-    root: "etd",
     command: "etd",
-    mapResponse: console.log
+    mapResponse: console.log,
+    name: "departureEstimate",
+    root: "etd"
   },
   {
-    name: "route",
-    root: "route",
     command: "routeInfo",
     mapResponse: ({ root }) => ({
       route: root.routes.route
-    })
+    }),
+    name: "route",
+    root: "route"
   },
   {
-    name: "routes",
-    root: "route",
     command: "routes",
     mapResponse: ({ root }) => ({
       routes: root.routes.route.map(r => ({
-        name: r.name,
-        routeId: r.routeID,
         abbreviation: r.abbr,
         hexColor: r.hexcolor,
+        name: r.name,
+        routeId: r.routeID,
         routeNumber: r.number
       })),
       scheduleNumber: root.sched_num
-    })
+    }),
+    name: "routes",
+    root: "route"
   },
   {
-    name: "stations",
-    root: "stn",
     command: "stns",
     mapResponse: ({ root }) => ({
       stations: root.stations.station.map(s => ({
-        name: s.name,
         abbreviation: s.abbr,
         address: {
           city: s.city,
-          street: s.address,
-          zipCode: s.zipcode,
-          state: s.state,
           county: s.county,
           latitude: s.gtfs_latitude,
-          longitude: s.gtfs_longitude
-        }
+          longitude: s.gtfs_longitude,
+          state: s.state,
+          street: s.address,
+          zipCode: s.zipcode
+        },
+        name: s.name
       }))
-    })
+    }),
+    name: "stations",
+    root: "stn"
   }
 ];
 
