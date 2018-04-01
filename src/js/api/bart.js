@@ -1,3 +1,5 @@
+import { set } from "~/util";
+
 // DOCS: http://api.bart.gov/docs/overview/index.aspx
 
 const UNIVERSAL_PARAMS = {
@@ -35,7 +37,7 @@ const API = [
     mapResponse: ({ root }) => ({
       trainCount: parseInt(root.traincount)
     }),
-    name: "trainCount",
+    methodName: "trainCount",
     root: "bsa"
   },
   {
@@ -45,19 +47,19 @@ const API = [
         ({ description }) => description["#cdata-section"]
       )
     }),
-    name: "serviceAdvisory",
+    methodName: "serviceAdvisory",
     root: "bsa"
   },
   {
     command: "elev",
     mapResponse: console.log,
-    name: "elevatorInformation",
+    methodName: "elevatorInformation",
     root: "bsa"
   },
   {
     command: "etd",
     mapResponse: console.log,
-    name: "departureEstimate",
+    methodName: "departureEstimate",
     root: "etd"
   },
   {
@@ -65,7 +67,7 @@ const API = [
     mapResponse: ({ root }) => ({
       route: root.routes.route
     }),
-    name: "route",
+    methodName: "route",
     root: "route"
   },
   {
@@ -80,7 +82,7 @@ const API = [
       })),
       scheduleNumber: root.sched_num
     }),
-    name: "routes",
+    methodName: "routes",
     root: "route"
   },
   {
@@ -100,20 +102,20 @@ const API = [
         name: s.name
       }))
     }),
-    name: "stations",
+    methodName: "stations",
     root: "stn"
   }
 ];
 
 const Bart = API.reduce(
-  (acc, { name, root, command, mapResponse, requiredParams }) => {
+  (acc, { methodName, root, command, mapResponse, requiredParams }) => {
     const apiMethod = async params => {
       const response = await fetch(generateUrl(root, command, params));
       const parsedResponse = await response.json();
       return mapResponse(parsedResponse);
     };
 
-    return Object.assign({}, acc, { [name]: apiMethod });
+    return set(methodName, apiMethod, acc);
   },
   {}
 );
