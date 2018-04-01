@@ -3,7 +3,14 @@ import { connect } from "preact-redux";
 
 import Loader from "./Loader";
 
-const App = ({ status }) => <Loader size={80} />;
+const App = ({ status }) => {
+  switch (status) {
+    case "LOADING":
+      return <Loader size={80} />;
+    case "LOADED":
+      return <div>Hello</div>;
+  }
+};
 
 const mapStateToProps = state => ({
   status: state.status
