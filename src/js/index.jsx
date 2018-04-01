@@ -5,7 +5,7 @@ import { render, h } from "preact";
 import { Provider } from "preact-redux";
 
 import Bart from "~/api/bart";
-import App from "~/app";
+import Switch from "~/app/Switch";
 import createStore from "~/store";
 import { initialize } from "~/store/actions";
 
@@ -20,7 +20,7 @@ export const main = () => {
   // Mount the application into #app
   render(
     <Provider store={store}>
-      <App />
+      <Switch />
     </Provider>,
     document.getElementById("app")
   );

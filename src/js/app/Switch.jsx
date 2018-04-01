@@ -2,13 +2,14 @@ import { h } from "preact";
 import { connect } from "preact-redux";
 
 import Loader from "./Loader";
+import Root from "./Root";
 
-const App = ({ status }) => {
+const Switch = ({ status }) => {
   switch (status) {
     case "LOADING":
       return <Loader size={80} />;
     case "LOADED":
-      return <div>Hello</div>;
+      return <Root />;
   }
 };
 
@@ -16,4 +17,4 @@ const mapStateToProps = state => ({
   status: state.status
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Switch);
