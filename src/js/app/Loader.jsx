@@ -2,13 +2,13 @@ import { h } from "preact";
 
 // By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL
 
-export default () => (
+export default ({ size = 44, color = "#fff" }) => (
   <svg
-    width="44"
-    height="44"
+    width={size}
+    height={size}
     viewBox="0 0 44 44"
     xmlns="http://www.w3.org/2000/svg"
-    stroke="#fff"
+    stroke={color}
   >
     <g fill="none" fill-rule="evenodd" stroke-width="2">
       <circle cx="22" cy="22" r="1">
