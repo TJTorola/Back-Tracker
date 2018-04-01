@@ -1,8 +1,16 @@
 import { h } from "preact";
 import { connect } from "preact-redux";
 
-const App = ({ state }) => <pre>{JSON.stringify(state, null, 2)}</pre>;
+import Loader from "./Loader";
 
-const mapStateToProps = state => ({ state });
+const App = ({ status }) => (
+  <div>
+    <Loader />
+  </div>
+);
+
+const mapStateToProps = state => ({
+  status: state.status
+});
 
 export default connect(mapStateToProps)(App);
