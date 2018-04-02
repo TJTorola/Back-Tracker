@@ -1,6 +1,7 @@
 import { h } from "preact";
 import { connect } from "preact-redux";
 
+import Swap from "~/components/swap";
 import { setFromStation, setToStation } from "~/store/actions";
 
 const Root = ({
@@ -11,23 +12,28 @@ const Root = ({
   toStation
 }) => (
   <nav>
-    <label>From:</label>
-    <select value={fromStation} onChange={setFromStation}>
-      {stations.map(s => (
-        <option key={s.name} value={s.abbreviation}>
-          {s.name}
-        </option>
-      ))}
-    </select>
+    <div class="selects">
+      <label>From:</label>
+      <select value={fromStation} onChange={setFromStation}>
+        {stations.map(s => (
+          <option key={s.name} value={s.abbreviation}>
+            {s.name}
+          </option>
+        ))}
+      </select>
 
-    <label>To:</label>
-    <select value={toStation} onChange={setToStation}>
-      {stations.map(s => (
-        <option key={s.name} value={s.abbreviation}>
-          {s.name}
-        </option>
-      ))}
-    </select>
+      <label>To:</label>
+      <select value={toStation} onChange={setToStation}>
+        {stations.map(s => (
+          <option key={s.name} value={s.abbreviation}>
+            {s.name}
+          </option>
+        ))}
+      </select>
+    </div>
+    <button>
+      <Swap height={30} />
+    </button>
   </nav>
 );
 
