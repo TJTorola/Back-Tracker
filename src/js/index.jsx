@@ -18,10 +18,12 @@ export const main = () => {
   window.store = createStore();
 
   // Mount the application into #app
+  const appEl = document.getElementById("app");
   render(
     <Provider store={store}>
       <Switch />
     </Provider>,
-    document.getElementById("app")
+    appEl,
+    appEl.children[0]
   );
 };
