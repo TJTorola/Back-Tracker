@@ -28,13 +28,13 @@ self.addEventListener("install", event => {
       .open(CACHE_NAME)
       .then(cache =>
         cache.addAll([
-          "/",
-          "/main.css",
-          "/initServiceWorker.js",
-          "/BackTracker.js",
-          "/icon@4x.png",
-          "/icon@2x.png",
-          "/icon.png"
+          "BackTracker.js",
+          "icon.png",
+          "icon@2x.png",
+          "icon@4x.png",
+          "index.html",
+          "initServiceWorker.js",
+          "main.css"
         ])
       )
   );
