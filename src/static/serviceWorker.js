@@ -31,7 +31,10 @@ self.addEventListener("install", event => {
           "/",
           "/main.css",
           "/initServiceWorker.js",
-          "/BackTracker.js"
+          "/BackTracker.js",
+          "/icon@4x.png",
+          "/icon@2x.png",
+          "/icon.png"
         ])
       )
   );
