@@ -1,5 +1,23 @@
 @import url("https://fonts.googleapis.com/css?family=Dosis|Raleway");
 
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
 html {
   font-family: "Raleway";
   color: #fff;
@@ -9,17 +27,26 @@ nav {
   margin: 0 auto;
   align-self: center;
   display: flex;
-  width: 320px;
+  flex-direction: row;
+}
+
+nav svg {
+  margin: 6px 10px;
+}
+
+.selects {
+  display: flex;
+  width: 270px;
   height: 50px;
   flex-wrap: wrap;
 }
 
-nav label {
+.selects label {
   text-align: right;
   margin-right: 10px;
-  width: 60px;
+  width: 40px;
 }
 
-nav select {
-  width: 250px;
+.selects select {
+  width: 220px;
 }
