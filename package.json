@@ -1,6 +1,6 @@
 {
   "name": "backtrack",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "description": "Quickly discern how you can backtrack on Bart",
   "main": "index.js",
   "author": "Tyler Torola <tyler@tjt.codes>",
