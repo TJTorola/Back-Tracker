@@ -1,14 +1,14 @@
 import lazyLoadCSS from "lazyload-css";
 
 import Bart, { findRoute } from "~/api/bart";
-import { createThunk, createAction } from "~/util";
+import { createAction } from "~/util";
 
 export const receiveRoutes = createAction("RECEIVE_ROUTES");
 export const receiveStations = createAction("RECEIVE_STATIONS");
 export const setStatus = createAction("SET_STATUS");
 export const initPlan = createAction("INIT_PLAN");
 
-export const fetchPlan = createThunk(
+export const fetchPlan = createAction(
   "FETCH_PLAN",
   ({ to, from }) => async ({ getState, dispatch }) => {
     const { routes } = getState();
@@ -30,7 +30,7 @@ export const fetchPlan = createThunk(
   }
 );
 
-export const initialize = createThunk(
+export const initialize = createAction(
   "INITIALIZE_BACK_TRACKER",
   () => async ({ getState, dispatch }) => {
     await Promise.all([
@@ -43,7 +43,7 @@ export const initialize = createThunk(
   }
 );
 
-export const requestRoutes = createThunk(
+export const requestRoutes = createAction(
   "REQUEST_ROUTES",
   () => async ({ dispatch }) => {
     const { routes: routeIndex } = await Bart.routes();
@@ -53,7 +53,7 @@ export const requestRoutes = createThunk(
   }
 );
 
-export const requestStations = createThunk(
+export const requestStations = createAction(
   "REQUEST_STATIONS",
   () => async ({ dispatch }) => {
     const { stations } = await Bart.stations();
@@ -61,7 +61,7 @@ export const requestStations = createThunk(
   }
 );
 
-export const setStations = createThunk(
+export const setStations = createAction(
   "SET_STATIONS",
   () => ({ getState, dispatch }) => {
     const { toStation, fromStation } = getState();
@@ -71,7 +71,7 @@ export const setStations = createThunk(
   }
 );
 
-export const swapStations = createThunk(
+export const swapStations = createAction(
   "SWAP_STATIONS",
   () => ({ dispatch, getState }) => {
     const { toStation, fromStation } = getState();
