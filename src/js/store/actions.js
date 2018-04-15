@@ -44,8 +44,8 @@ export const swapStations = createThunk(
     const { toStation, fromStation } = getState();
     dispatch(
       setStations({
-        to: toStation,
-        from: fromStation
+        to: fromStation,
+        from: toStation
       })
     );
   }
