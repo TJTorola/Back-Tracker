@@ -127,3 +127,15 @@ const Bart = API.reduce(
 );
 
 export default Bart;
+
+// HELPER FUNCTIONS //
+
+export const findRoute = ({ from, to }, routes) =>
+  routes.find(r => {
+    const toIndex = r.stations.indexOf(to);
+    const fromIndex = r.stations.indexOf(from);
+    if (toIndex === -1 || fromIndex === -1) return false;
+
+    // The trains go from the start of the array to the end
+    return toIndex > fromIndex;
+  });

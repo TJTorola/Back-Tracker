@@ -1,13 +1,34 @@
 import lazyLoadCSS from "lazyload-css";
 
-import Bart from "~/api/bart";
+import Bart, { findRoute } from "~/api/bart";
 import { createThunk, createAction } from "~/util";
 
 export const receiveRoutes = createAction("RECEIVE_ROUTES");
 export const receiveStations = createAction("RECEIVE_STATIONS");
 export const setStatus = createAction("SET_STATUS");
+export const initPlan = createAction("INIT_PLAN");
 
-export const fetchPlan = createThunk("FETCH_PLAN", plan => async () => {});
+export const fetchPlan = createThunk(
+  "FETCH_PLAN",
+  ({ to, from }) => async ({ getState, dispatch }) => {
+    const { routes } = getState();
+    const route = findRoute({ to, from }, routes);
+    const currentIdx = route.stations.indexOf(from);
+    const backStations = [currentIdx - 1, currentIdx - 2, currentIdx - 3]
+      .filter(idx => idx >= 0)
+      .map(idx => route.stations[idx]);
+
+    dispatch(
+      initPlan({
+        backStations,
+        from,
+        key: `${from}->${to}`,
+        route,
+        to
+      })
+    );
+  }
+);
 
 export const initialize = createThunk(
   "INITIALIZE_BACK_TRACKER",
@@ -45,7 +66,7 @@ export const setStations = createThunk(
   () => ({ getState, dispatch }) => {
     const { toStation, fromStation } = getState();
     if (toStation && fromStation) {
-      dispatch(fetchPlan(`${fromStation}->${toStation}`));
+      dispatch(fetchPlan({ to: toStation, from: fromStation }));
     }
   }
 );
