@@ -2,7 +2,7 @@ import { h } from "preact";
 import { connect } from "preact-redux";
 
 import Swap from "~/components/swap";
-import { setFromStation, setToStation } from "~/store/actions";
+import { setStations } from "~/store/actions";
 
 const Root = ({
   fromStation,
@@ -44,8 +44,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setFromStation: e => dispatch(setFromStation(e.target.value)),
-  setToStation: e => dispatch(setToStation(e.target.value))
+  setFromStation: e => dispatch(setStations({ from: e.target.value })),
+  setToStation: e => dispatch(setStations({ to: e.target.value }))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Root);

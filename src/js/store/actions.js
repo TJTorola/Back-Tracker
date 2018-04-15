@@ -5,9 +5,7 @@ import { createThunk, createAction } from "~/util";
 
 export const receiveRoutes = createAction("RECEIVE_ROUTES");
 export const receiveStations = createAction("RECEIVE_STATIONS");
-export const setFromStation = createAction("SET_FROM_STATION");
 export const setStatus = createAction("SET_STATUS");
-export const setToStation = createAction("SET_TO_STATION");
 
 export const initialize = createThunk(
   "INITIALIZE_BACK_TRACKER",
@@ -38,11 +36,17 @@ export const requestStations = createThunk(
   }
 );
 
+export const setStations = createThunk("SET_STATIONS", () => () => {});
+
 export const swapStations = createThunk(
   "SWAP_STATIONS",
   () => ({ dispatch, getState }) => {
     const { toStation, fromStation } = getState();
-    dispatch(setToStation(fromStation));
-    dispatch(setFromStation(toStation));
+    dispatch(
+      setStations({
+        to: toStation,
+        from: fromStation
+      })
+    );
   }
 );
