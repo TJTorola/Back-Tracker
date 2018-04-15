@@ -17,8 +17,11 @@ export const set = curry((field, value, state) =>
   Object.assign({}, state, { [field]: value })
 );
 
-export const setFrom = curry((setField, fromField, value, state) =>
-  Object.assign({}, state, { [setField]: value[fromField] })
+export const setFrom = curry(
+  (setField, fromField, value, state) =>
+    value[fromField] !== undefined
+      ? Object.assign({}, state, { [setField]: value[fromField] })
+      : state
 );
 
 /**
