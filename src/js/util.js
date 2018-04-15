@@ -16,6 +16,15 @@ export const createReducer = (actionMap, initialState) => (
 ) =>
   actionMap[action.type] ? actionMap[action.type](action.data, state) : state;
 
+export const pipe = functions => (...args) => {
+  const [head, ...tail] = functions;
+  const testResult = head(...args);
+  const initialArgs = args.slice(0, -1);
+  return typeof testResult === "function"
+    ? pipe([testResult, ...tail.map(f => f(...args))])
+    : tail.reduce((acc, f) => f(...initialArgs, acc), testResult);
+};
+
 export const set = curry((field, value, state) =>
   Object.assign({}, state, { [field]: value })
 );
@@ -26,18 +35,3 @@ export const setFrom = curry(
       ? Object.assign({}, state, { [setField]: value[fromField] })
       : state
 );
-
-/**
- * This applies arguments to an array of functions progressively.
- * The final argument will be replaced by the return values of the functions.
- *
- * Important: The functions must all have the same arity in order for this to work.
- */
-export const pipe = functions => (...args) => {
-  const [head, ...tail] = functions;
-  const testResult = head(...args);
-  const initialArgs = args.slice(0, -1);
-  return typeof testResult === "function"
-    ? pipe([testResult, ...tail.map(f => f(...args))])
-    : tail.reduce((acc, f) => f(...initialArgs, acc), testResult);
-};
