@@ -64,8 +64,14 @@ const API = [
   },
   {
     command: "routeInfo",
-    mapResponse: ({ root }) => ({
-      route: root.routes.route
+    mapResponse: ({ root: { routes: { route: r }, sched_num } }) => ({
+      abbreviation: r.abbr,
+      hexColor: r.hexcolor,
+      name: r.name,
+      routeId: r.routeID,
+      routeNumber: r.number,
+      stations: r.config.station,
+      scheduleNumber: sched_num
     }),
     methodName: "route",
     root: "route"
