@@ -1,5 +1,5 @@
 const CACHE = true;
-const CACHE_NAME = "backTracker_0";
+const CACHE_NAME = "backTracker-v1.6.0";
 const CACHE_WHITELIST = [CACHE_NAME];
 
 // Delete old caches that are not our current one!
