@@ -25,7 +25,9 @@ export const initialize = createThunk(
 export const requestRoutes = createThunk(
   "REQUEST_ROUTES",
   () => async ({ dispatch }) => {
-    const { routes } = await Bart.routes();
+    const { routes: routeIndex } = await Bart.routes();
+    const routePs = routeIndex.map(r => Bart.route({ route: r.routeNumber }));
+    const routes = await Promise.all(routePs);
     dispatch(receiveRoutes(routes));
   }
 );
