@@ -1,12 +1,12 @@
 import curry from "ramda/src/curry";
 
-export const createAction = (type, thunk) => data => {
-  const action = { type, data };
+export const createAction = (type, thunk) => payload => {
+  const action = { type, payload };
 
   if (!thunk) return action;
   return (dispatch, getState) => {
     dispatch(action);
-    return thunk(data)({ getState, dispatch });
+    return thunk(payload)({ getState, dispatch });
   };
 };
 
@@ -14,7 +14,9 @@ export const createReducer = (actionMap, initialState) => (
   state = initialState,
   action
 ) =>
-  actionMap[action.type] ? actionMap[action.type](action.data, state) : state;
+  actionMap[action.type]
+    ? actionMap[action.type](action.payload, state)
+    : state;
 
 export const pipe = functions => (...args) => {
   const [head, ...tail] = functions;
