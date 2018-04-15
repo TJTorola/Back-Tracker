@@ -7,6 +7,8 @@ export const receiveRoutes = createAction("RECEIVE_ROUTES");
 export const receiveStations = createAction("RECEIVE_STATIONS");
 export const setStatus = createAction("SET_STATUS");
 
+export const fetchPlan = createThunk("FETCH_PLAN", plan => async () => {});
+
 export const initialize = createThunk(
   "INITIALIZE_BACK_TRACKER",
   () => async ({ getState, dispatch }) => {
@@ -36,7 +38,15 @@ export const requestStations = createThunk(
   }
 );
 
-export const setStations = createThunk("SET_STATIONS", () => () => {});
+export const setStations = createThunk(
+  "SET_STATIONS",
+  () => ({ getState, dispatch }) => {
+    const { toStation, fromStation } = getState();
+    if (toStation && fromStation) {
+      dispatch(fetchPlan(`${fromStation}->${toStation}`));
+    }
+  }
+);
 
 export const swapStations = createThunk(
   "SWAP_STATIONS",
